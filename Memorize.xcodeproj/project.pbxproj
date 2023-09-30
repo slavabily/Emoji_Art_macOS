@@ -14,6 +14,7 @@
 		B9B4F66728832F2C00B5A47E /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B4F66628832F2C00B5A47E /* GameView.swift */; };
 		B9B4F66928832F2D00B5A47E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9B4F66828832F2D00B5A47E /* Assets.xcassets */; };
 		B9B4F66C28832F2D00B5A47E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9B4F66B28832F2D00B5A47E /* Preview Assets.xcassets */; };
+		B9B5849C2AC69BCE00042C52 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B5849B2AC69BCE00042C52 /* Extensions.swift */; };
 		B9BD363728AAC328005A3C5A /* EmojiMemoryGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BD363628AAC328005A3C5A /* EmojiMemoryGame.swift */; };
 		B9DA763B28B655620097AD80 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9DA763A28B655620097AD80 /* Theme.swift */; };
 		B9EB506F2A96376700D985ED /* EmojiTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9EB506E2A96376700D985ED /* EmojiTheme.swift */; };
@@ -23,12 +24,14 @@
 /* Begin PBXFileReference section */
 		B92FD90428A96C1900AEFE5E /* MemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryGame.swift; sourceTree = "<group>"; };
 		B96447002A9F69A3001798C1 /* UtilityExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
+		B973AA8A2AC4448E0001AE9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B9928F952AA604F800FAEB78 /* ThemeEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeEditor.swift; sourceTree = "<group>"; };
 		B9B4F66128832F2C00B5A47E /* Memorize.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memorize.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B4F66428832F2C00B5A47E /* MemorizeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemorizeApp.swift; sourceTree = "<group>"; };
 		B9B4F66628832F2C00B5A47E /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		B9B4F66828832F2D00B5A47E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B9B4F66B28832F2D00B5A47E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		B9B5849B2AC69BCE00042C52 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B9BD363628AAC328005A3C5A /* EmojiMemoryGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiMemoryGame.swift; sourceTree = "<group>"; };
 		B9DA763A28B655620097AD80 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		B9EB506E2A96376700D985ED /* EmojiTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiTheme.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		B9B4F66328832F2C00B5A47E /* Memorize */ = {
 			isa = PBXGroup;
 			children = (
+				B973AA8A2AC4448E0001AE9A /* Info.plist */,
 				B9B4F66428832F2C00B5A47E /* MemorizeApp.swift */,
 				B9F794AC2AA0B4B100399ECD /* ThemeChooserView.swift */,
 				B9928F952AA604F800FAEB78 /* ThemeEditor.swift */,
@@ -74,6 +78,7 @@
 				B92FD90428A96C1900AEFE5E /* MemoryGame.swift */,
 				B9DA763A28B655620097AD80 /* Theme.swift */,
 				B96447002A9F69A3001798C1 /* UtilityExtensions.swift */,
+				B9B5849B2AC69BCE00042C52 /* Extensions.swift */,
 				B9B4F66828832F2D00B5A47E /* Assets.xcassets */,
 				B9B4F66A28832F2D00B5A47E /* Preview Content */,
 			);
@@ -163,6 +168,7 @@
 				B92FD90528A96C1900AEFE5E /* MemoryGame.swift in Sources */,
 				B9F794AD2AA0B4B100399ECD /* ThemeChooserView.swift in Sources */,
 				B9B4F66728832F2C00B5A47E /* GameView.swift in Sources */,
+				B9B5849C2AC69BCE00042C52 /* Extensions.swift in Sources */,
 				B96447012A9F69A3001798C1 /* UtilityExtensions.swift in Sources */,
 				B9DA763B28B655620097AD80 /* Theme.swift in Sources */,
 				B9B4F66528832F2C00B5A47E /* MemorizeApp.swift in Sources */,
@@ -300,11 +306,13 @@
 				DEVELOPMENT_TEAM = L6T2S9K4GS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Memorize/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -329,11 +337,13 @@
 				DEVELOPMENT_TEAM = L6T2S9K4GS;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Memorize/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportsDocumentBrowser = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

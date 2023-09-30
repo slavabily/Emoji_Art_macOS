@@ -11,14 +11,14 @@ import SwiftUI
 struct MemorizeApp: App {
     
     var body: some Scene {
-        WindowGroup {
+        DocumentGroup(newDocument: { EmojiTheme() }) { config in
             if UIDevice.current.userInterfaceIdiom == .pad {
                 Text("Emoji Memory Game")
                     .font(.largeTitle)
                     .bold()
                     .foregroundColor(.red)
             }
-            ThemeChooserView() 
+            ThemeChooserView(emojiTheme: config.document)
         }
     }
 }

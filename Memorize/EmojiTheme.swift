@@ -6,28 +6,43 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
-class EmojiTheme: ObservableObject {
+extension UTType {
+    static let memorize = UTType(exportedAs: "com.slavabily-me.com.Memorize")
+}
+
+class EmojiTheme: ReferenceFileDocument {
     
-    @Published var themes = [Theme]() {
-        didSet {
-            storeInUserDefaults()
+    static var readableContentTypes: [UTType] {
+        [.memorize]
+    }
+    
+    func snapshot(contentType: UTType) throws -> Data {
+        try JSONEncoder().encode(themes)
+    }
+    
+    func fileWrapper(snapshot: Data, configuration: WriteConfiguration) throws -> FileWrapper {
+         FileWrapper(regularFileWithContents: snapshot)
+    }
+    
+    typealias Themes = [Theme]
+     
+    required init(configuration: ReadConfiguration) throws {
+        if let data = configuration.file.regularFileContents {
+            themes = try JSONDecoder().decode(Themes.self, from: data)
+        } else {
+            throw CocoaError(.fileReadCorruptFile)
         }
     }
-    
-    private func storeInUserDefaults() {
-        UserDefaults.standard.set(try? JSONEncoder().encode(themes), forKey: "Themes")
-    }
-    
-    private func restoreFromUserDefaults() {
-        if let jsonData = UserDefaults.standard.data(forKey: "Themes"),
-           let decodedThemes = try? JSONDecoder().decode([Theme].self, from: jsonData) {
-            themes = decodedThemes
+     
+    @Published var themes = [Theme]() {
+        didSet {
+ 
         }
     }
     
     init() {
-        restoreFromUserDefaults()
         if themes.isEmpty {
             insertTheme(named: "Vehicles", emojis: "🚙🚗🚘🚕🚖🏎🚚🛻🚛🚐🚓🚔🚑🚒🚀✈️🛫🛬🛩🚁🛸🚲🏍🛶", color: .red)
             insertTheme(named: "Faces", emojis: "😀😃😄😁😆😅😂🤣🥲☺️😊😇🙂🙃😉😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎", color: .green)
@@ -41,5 +56,38 @@ class EmojiTheme: ObservableObject {
         let theme = Theme(name: name, emojis: emojis ?? "", color: color, id: unique)
         let safeIndex = min(max(index, 0), themes.count)
         themes.insert(theme, at: safeIndex)
+    }
+    
+    // MARK: - Undo
+    
+    private func undoablyPerform(_ action: String, with undoManager: UndoManager? = nil, doit: () -> Void) {
+        let oldEmojiThemes = themes
+        doit()
+        undoManager?.registerUndo(withTarget: self, handler: { myself in
+            myself.undoablyPerform(action, with: undoManager) {
+                myself.themes = oldEmojiThemes
+            }
+        })
+        undoManager?.setActionName(action)
+    }
+    
+    // MARK: - Intent(s)
+    
+    func deleteTheme(at indexSet: IndexSet, undoWith undoManager: UndoManager? = nil) {
+        undoablyPerform("Remove theme", with: undoManager) {
+            themes.remove(atOffsets: indexSet)
+        }
+    }
+    
+    func moveTheme(from indexSet: IndexSet, to newOffset: Int, undoWith undoManager: UndoManager? = nil) {
+        undoablyPerform("Move theme", with: undoManager) {
+            themes.move(fromOffsets: indexSet, toOffset: newOffset)
+        }
+    }
+    
+    func addNewTheme(undoWith undoManager: UndoManager? = nil) {
+        undoablyPerform("Add new theme", with: undoManager) {
+            insertTheme(named: "New", emojis: "😀😁😅🥲😇😉🥰", color: .blue, at: 0)
+        }
     }
 }

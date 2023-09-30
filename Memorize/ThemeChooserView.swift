@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ThemeChooserView: View {
     
-    @StateObject var emojiTheme = EmojiTheme()
+    @Environment(\.undoManager) var undoManager
+    
+    @ObservedObject var emojiTheme: EmojiTheme
     
     @State private var themeToEdit: Theme?
     
@@ -34,20 +36,21 @@ struct ThemeChooserView: View {
                     }    
                 }
                 .onDelete { indexSet in
-                    emojiTheme.themes.remove(atOffsets: indexSet)
+                    emojiTheme.deleteTheme(at: indexSet, undoWith: undoManager)
                 }
                 .onMove { indexSet, newOffset in
-                    emojiTheme.themes.move(fromOffsets: indexSet, toOffset: newOffset)
+                    emojiTheme.moveTheme(from: indexSet, to: newOffset, undoWith: undoManager)
                 }
             }
             .navigationBarTitle("Theme Chooser")
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    EditButton()
+                    UndoButton()
+                }
                 ToolbarItem(placement: .navigationBarLeading) {
                     addNewThemeButton
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
                 }
             }
             .environment(\.editMode, $editMode)
@@ -70,7 +73,8 @@ struct ThemeChooserView: View {
     
     var addNewThemeButton: some View {
         Button {
-            emojiTheme.insertTheme(named: "New", emojis: "😀😁😅🥲😇😉🥰", color: .blue, at: 0)
+            emojiTheme.addNewTheme(undoWith: undoManager)
+ 
             themeToEdit = emojiTheme.themes.first
         } label: {
             Image(systemName: "plus")
